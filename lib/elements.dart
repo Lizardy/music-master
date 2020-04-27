@@ -1,13 +1,14 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainCard extends StatelessWidget {
   Widget photoPortrait() {
     return Image.asset(
       'assets/images/portrait.JPG',
       fit: BoxFit.contain,
-      width: 260,
+      width: 300,
     );
   }
 
@@ -17,10 +18,10 @@ class MainCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text(
-            "Гнездилов Александр Ильич",
+            "Гнездилов \nАлександр Ильич",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 22.0,
+            style: GoogleFonts.ruslanDisplay(
+              fontSize: 24.0,
             ),
           ),
           Padding(padding: EdgeInsets.all(10.0)),
@@ -83,9 +84,9 @@ class MainCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text(
-            "Дружественные сайты",
+            "Дружественные \nсайты",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.ruslanDisplay(
               fontSize: 18.0,
             ),
           ),
@@ -131,6 +132,20 @@ class MainCard extends StatelessWidget {
               }
             },
           ),
+          FlatButton(
+            child: Text(
+                'Российский национальный музей музыки:\n«Скифская арфа - дар Алтая»',
+                textAlign: TextAlign.center),
+            onPressed: () async {
+              String url =
+                  'https://music-museum.ru/collections/expomusic/skifskaya-arfa-dar-altaya';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Невозможно перейти по адресу $url';
+              }
+            },
+          ),
           Padding(padding: EdgeInsets.all(5.0)),
           Icon(FontAwesomeIcons.addressBook),
           FlatButton(
@@ -159,9 +174,9 @@ class MainCard extends StatelessWidget {
       child: Container(
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              photoPortrait(),
-              contacts(),
-              otherWebsites(),
+          photoPortrait(),
+          contacts(),
+          otherWebsites(),
         ]),
       ),
     );
@@ -170,21 +185,37 @@ class MainCard extends StatelessWidget {
 
 class MainNavigation extends StatelessWidget {
   //TODO images
-  static Map<String, String> _navigationData = {
-    'Биография': 'assets/images/harp_ancient.jpg',
-    'Деятельность': 'assets/images/harp_ancient.jpg',
-    'Музыкальные инструменты': 'assets/images/harp_ancient.jpg',
-    'Организации': 'assets/images/harp_ancient.jpg',
-    'Публикации в СМИ': 'assets/images/harp_ancient.jpg',
+  static Map<String, Map<String, String>> navigationData = {
+    'biography': {
+      'title': 'Биография',
+      'imgPath': 'assets/images/harp_ancient.jpg'
+    },
+    'activity': {
+      'title': 'Деятельность',
+      'imgPath': 'assets/images/harp_ancient.jpg'
+    },
+    'instruments': {
+      'title': 'Музыкальные инструменты',
+      'imgPath': 'assets/images/harp_ancient.jpg'
+    },
+    'organizations': {
+      'title': 'Организации',
+      'imgPath': 'assets/images/harp_ancient.jpg'
+    },
+    'publications': {
+      'title': 'Публикации \nв СМИ',
+      'imgPath': 'assets/images/harp_ancient.jpg'
+    },
   };
 
-  Widget navigationTile(String imgPath, String title) {
+  Widget navigationTile(
+      BuildContext context, String route, String title, String imgPath) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
         elevation: 1.0,
         child: InkWell(
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, '/$route'),
           child: GridTile(
             child: Image.asset(
               imgPath,
@@ -197,7 +228,11 @@ class MainNavigation extends StatelessWidget {
                 softWrap: true,
                 maxLines: 2,
                 overflow: TextOverflow.visible,
-                style: TextStyle(color: Colors.black, fontSize: 18.0),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.ruslanDisplay(
+                  fontSize: 20.0,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -212,8 +247,9 @@ class MainNavigation extends StatelessWidget {
       child: GridView.count(
         shrinkWrap: true,
         crossAxisCount: 5,
-        children: List<Widget>.from(_navigationData.entries
-            .map((element) => navigationTile(element.value, element.key))),
+        children: List<Widget>.from(navigationData.entries.map((element) =>
+            navigationTile(context, element.key, element.value['title'],
+                element.value['imgPath']))),
       ),
     );
   }
