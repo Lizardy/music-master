@@ -7,7 +7,7 @@ class MainCard extends StatelessWidget {
   Widget photoPortrait() {
     return Image.asset(
       'assets/images/portrait.JPG',
-      fit: BoxFit.contain,
+      fit: BoxFit.fitHeight,
       width: 300,
     );
   }
@@ -168,6 +168,13 @@ class MainCard extends StatelessWidget {
     );
   }
 
+  Widget slavicPatternVertical() {
+    return Image.asset('assets/images/slavic_pattern_v.jpg',
+      fit: BoxFit.scaleDown,
+      width: 35.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -175,7 +182,9 @@ class MainCard extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           photoPortrait(),
+          slavicPatternVertical(),
           contacts(),
+          slavicPatternVertical(),
           otherWebsites(),
         ]),
       ),
@@ -184,34 +193,37 @@ class MainCard extends StatelessWidget {
 }
 
 class MainNavigation extends StatelessWidget {
-  //TODO images
   static Map<String, Map<String, String>> navigationData = {
-    'biography': {
-      'title': 'Биография',
-      'imgPath': 'assets/images/harp_ancient.jpg'
+    'organizations': {
+      'title': 'Организации',
+      'imgPath': 'assets/images/organizations.jpg'
     },
     'activity': {
       'title': 'Деятельность',
-      'imgPath': 'assets/images/harp_ancient.jpg'
+      'imgPath': 'assets/images/activity.jpg'
     },
     'instruments': {
-      'title': 'Музыкальные инструменты',
-      'imgPath': 'assets/images/harp_ancient.jpg'
+      'title': 'Авторские инструменты',
+      'imgPath': 'assets/images/instruments.jpg'
     },
-    'organizations': {
-      'title': 'Организации',
-      'imgPath': 'assets/images/harp_ancient.jpg'
+    'biography': {
+      'title': 'Биография',
+      'imgPath': 'assets/images/biography.jpg'
     },
     'publications': {
-      'title': 'Публикации \nв СМИ',
-      'imgPath': 'assets/images/harp_ancient.jpg'
+      'title': 'Публикации в СМИ',
+      'imgPath': 'assets/images/publications.jpg'
+    },
+    'docs': {
+      'title': 'Патенты, дипломы',
+      'imgPath': 'assets/images/patent.jpg'
     },
   };
 
   Widget navigationTile(
       BuildContext context, String route, String title, String imgPath) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Material(
         elevation: 1.0,
         child: InkWell(
@@ -219,7 +231,7 @@ class MainNavigation extends StatelessWidget {
           child: GridTile(
             child: Image.asset(
               imgPath,
-              fit: BoxFit.contain,
+              fit: BoxFit.fitWidth,
               alignment: Alignment.bottomCenter,
             ),
             header: GridTileBar(
@@ -234,6 +246,10 @@ class MainNavigation extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              subtitle: Image.asset('assets/images/slavic_pattern_h.jpg',
+                fit: BoxFit.fitHeight,
+//                height: 18.0,
+              ),
             ),
           ),
         ),
@@ -246,7 +262,7 @@ class MainNavigation extends StatelessWidget {
     return Container(
       child: GridView.count(
         shrinkWrap: true,
-        crossAxisCount: 5,
+        crossAxisCount: 3,
         children: List<Widget>.from(navigationData.entries.map((element) =>
             navigationTile(context, element.key, element.value['title'],
                 element.value['imgPath']))),

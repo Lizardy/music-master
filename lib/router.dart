@@ -22,6 +22,9 @@ class CustomRouter {
   static Handler _publicationsHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           PublicationsPage());
+  static Handler _docsHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          DocsPage());
 
   static void setupRouter() {
     router.define(
@@ -47,6 +50,10 @@ class CustomRouter {
     router.define(
       '/publications',
       handler: _publicationsHandler,
+    );
+    router.define(
+      '/docs',
+      handler: _docsHandler,
     );
   }
 }
