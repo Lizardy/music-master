@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gnezdilov/router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'elements.dart';
 import 'biography.dart';
 
@@ -10,11 +11,63 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final _navigationData = MainNavigation.navigationData;
+
+  Widget bottomNavigation(BuildContext context) {
+    var _navigationItems = List<Widget>();
+    if (MediaQuery.of(context).size.width < 600)
+      _navigationItems.add(
+        ListTile(
+          title: Image.asset(
+            'assets/images/slavic_pattern_h.jpg',
+            fit: BoxFit.scaleDown,
+          ),
+        ),
+      );
+    _navigationItems.addAll(
+      _navigationData.entries.map(
+        (element) => ListTile(
+          title: FlatButton(
+            onPressed: () => Navigator.pushNamed(context, '/${element.key}'),
+            child: Text(element.value['title'],
+                style: GoogleFonts.ruslanDisplay(
+                  fontSize: 24.0,
+                )),
+          ),
+        ),
+      ),
+    );
+
+    return BottomAppBar(
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () => showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Center(
+                      child: Container(
+                    width: 600.0,
+                    child: ListView(
+                      children: _navigationItems,
+                    ),
+                  ));
+                }),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget floatingHomeButton(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () => Navigator.pushNamed(context, '/'),
-      label: Text('На главную'),
-      icon: Icon(FontAwesomeIcons.home),
+      label: Text('На главную',
+          style: GoogleFonts.ruslanDisplay(
+            fontSize: 20.0,
+          )),
+//      icon: Icon(FontAwesomeIcons.home),
     );
   }
 
@@ -37,17 +90,24 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              MainCard(),
-              MainNavigation(),
-            ],
-          ),
+    return Scaffold(
+      bottomNavigationBar: MyApp().bottomNavigation(context),
+      body: SingleChildScrollView(
+        child: Center(
+          child: LayoutBuilder(builder: (context, constraints) {
+            double paddingH = constraints.maxWidth > 800 ? 60.0 : 10.0;
+            return Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: paddingH, vertical: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  MainCard(constraints.maxWidth),
+                  MainNavigation(constraints.maxWidth),
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );
