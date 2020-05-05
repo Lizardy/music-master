@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gnezdilov/docs.dart';
 import 'package:gnezdilov/router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'elements.dart';
@@ -117,11 +118,21 @@ class MyHomePage extends StatelessWidget {
 class BiographyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _navigationData = MainNavigation.navigationData;
+    final _routeName = ModalRoute.of(context).settings.name.replaceAll('/', '');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Биография'),
+        title: Text(_navigationData[_routeName]['title']),
       ),
-      body: Biography(),
+      body: LayoutBuilder(builder: (context, constraints) {
+        double paddingH = constraints.maxWidth > 800 ? 60.0 : 10.0;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: paddingH, vertical: 10.0),
+          child: SingleChildScrollView(child: Biography()),
+        );
+      }),
+      bottomNavigationBar: MyApp().bottomNavigation(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: MyApp().floatingHomeButton(context),
     );
   }
