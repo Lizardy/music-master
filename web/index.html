@@ -18,6 +18,26 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDqBuud_gTdoUlvSBxISEjgnn3MoFM0e4c",
+      authDomain: "gnezdilov.firebaseapp.com",
+      databaseURL: "https://gnezdilov.firebaseio.com",
+      projectId: "gnezdilov",
+      storageBucket: "gnezdilov.appspot.com",
+      messagingSenderId: "174613166057",
+      appId: "1:174613166057:web:93b69f31a18502fd7ffd78",
+      measurementId: "G-NSSYCW35K0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
