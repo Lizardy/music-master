@@ -225,6 +225,22 @@ class MainCard extends StatelessWidget {
           },
         ),
       ),
+      ListTile(
+        title: FlatButton(
+          child: Text(
+              'О народном мастере на сайте проекта \n«Традиционная народная культура Алтайского края»',
+              textAlign: TextAlign.center),
+          onPressed: () async {
+            String url =
+                'http://alttradition.ru/mastera/2012/gnezdilov-aleksandr-il-ich1/index.php';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Невозможно перейти по адресу $url';
+            }
+          },
+        ),
+      ),
     ];
   }
 
