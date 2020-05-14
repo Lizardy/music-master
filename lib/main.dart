@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gnezdilov/docs.dart';
+import 'package:gnezdilov/instruments.dart';
 import 'package:gnezdilov/publications.dart';
 import 'package:gnezdilov/router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -158,26 +159,7 @@ class InstrumentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _navigationData = MainNavigation.navigationData;
     final _routeName = ModalRoute.of(context).settings.name.replaceAll('/', '');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_navigationData[_routeName]['title']),
-      ),
-      floatingActionButton: MyApp().floatingHomeButton(context),
-    );
-  }
-}
-
-class OrganizationsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final _navigationData = MainNavigation.navigationData;
-    final _routeName = ModalRoute.of(context).settings.name.replaceAll('/', '');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_navigationData[_routeName]['title']),
-      ),
-      floatingActionButton: MyApp().floatingHomeButton(context),
-    );
+    return Instruments(_navigationData[_routeName]['title']);
   }
 }
 
