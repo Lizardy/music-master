@@ -66,6 +66,7 @@ class Publication {
     'amic': {'name': 'Amic.ru', 'iconFileName': 'amic.jpg'},
     'altapress': {'name': 'Алтапресс', 'iconFileName': 'altapress.jpeg'},
     'ap22': {'name': 'Алтайская правда', 'iconFileName': 'ap22.jpg'},
+    'katun24': {'name': 'Катунь 24', 'iconFileName': 'k24.jpg'},
   };
 
   Widget icon() {
