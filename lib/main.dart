@@ -106,6 +106,7 @@ class MyHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   MainCard(constraints.maxWidth),
+                  ActivityCard(constraints.maxWidth),
                   MainNavigation(constraints.maxWidth),
                 ],
               ),

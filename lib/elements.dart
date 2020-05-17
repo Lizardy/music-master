@@ -297,6 +297,93 @@ class MainCard extends StatelessWidget {
   }
 }
 
+class ActivityCard extends StatelessWidget {
+  final parentWidth;
+
+  ActivityCard(this.parentWidth);
+
+  final List<String> _activities = [
+    '\nРеставрация музыкальных инструментов\n',
+    '\nСоздание авторских музыкальных инструментов\n',
+    '\nСоздание сувенирных звучащих музыкальных инструментов\n',
+    '\nНастройка фортепиано, роялей в\u00A0любом состоянии\n',
+    '\nПроведение мастер\u2011классов, творческих встреч\u2011лекций\n',
+    '\nСбор сведений о\u00A0музыкальных мастерах, объединение опыта\n',
+  ];
+  final List<String> _imageNames = [
+    'restoration.png',
+    'creation.png',
+    'souvenir.png',
+    'tuning.png',
+    'lecture.png',
+    'masters.png',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> _activityTiles = [];
+    for (var i = 0; i < _activities.length; i++) {
+      var _alignment, _width, _textAlign, _height, _padding;
+      if (parentWidth < 450) {
+        _alignment = i % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight;
+        _textAlign = i % 2 == 0 ? TextAlign.left : TextAlign.right;
+        _width = parentWidth * 0.9;
+        _height = _width / 3;
+        _padding = i % 2 == 0
+            ? EdgeInsets.only(right: _width / 6, left: 20.0)
+            : EdgeInsets.only(left: _width / 6, right: 20.0);
+      } else if (parentWidth < 1000) {
+        _alignment = i % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight;
+        _textAlign = i % 2 == 0 ? TextAlign.left : TextAlign.right;
+        _width = parentWidth * 0.9 / 2;
+        _height = _width / 2;
+        _padding = EdgeInsets.symmetric(horizontal: _width / 6);
+      } else {
+        _alignment = Alignment.center;
+        _textAlign = TextAlign.center;
+        _width = parentWidth * 0.9 / 3;
+        _height = _width / 2;
+        _padding = EdgeInsets.symmetric(horizontal: _width / 6);
+      }
+      _activityTiles.add(Container(
+        width: _width,
+        height: _height,
+        alignment: _alignment,
+        padding: _padding,
+        child: Container(
+          padding: const EdgeInsets.all(5.0),
+          child: Text(
+            _activities[i],
+            textAlign: _textAlign,
+            softWrap: true,
+            style: GoogleFonts.alice(
+              fontSize: parentWidth > 800 ? 18.0 : 14.0,
+              color: Colors.white,
+            ),
+          ),
+          decoration: BoxDecoration(color: Colors.blueGrey.withOpacity(0.95)),
+        ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/activity/${_imageNames[i]}'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ));
+    }
+
+    return Card(
+      child: Container(
+        width: parentWidth * 0.9,
+        child: Wrap(
+          runSpacing: 10.0,
+          children: _activityTiles,
+        ),
+      ),
+    );
+  }
+}
+
 class MainNavigation extends StatelessWidget {
   const MainNavigation(this.parentWidth) : super();
 
