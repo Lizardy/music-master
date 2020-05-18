@@ -10,15 +10,9 @@ class CustomRouter {
   static Handler _biographyHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           BiographyPage());
-  static Handler _activityHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          ActivityPage());
   static Handler _instrumentsHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           InstrumentsPage());
-  static Handler _organizationsHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          OrganizationsPage());
   static Handler _publicationsHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           PublicationsPage());
@@ -36,16 +30,8 @@ class CustomRouter {
       handler: _biographyHandler,
     );
     router.define(
-      '/activity',
-      handler: _activityHandler,
-    );
-    router.define(
       '/instruments',
       handler: _instrumentsHandler,
-    );
-    router.define(
-      '/organizations',
-      handler: _organizationsHandler,
     );
     router.define(
       '/publications',
