@@ -48,13 +48,14 @@ class MyApp extends StatelessWidget {
             onPressed: () => showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return Center(
-                      child: Container(
-                    width: 600.0,
+                  return Container(
+                    height: MediaQuery.of(context).size.width < 600
+                        ? MediaQuery.of(context).size.height * 0.35
+                        : MediaQuery.of(context).size.height * 0.25,
                     child: ListView(
                       children: _navigationItems,
                     ),
-                  ));
+                  );
                 }),
           )
         ],
@@ -137,20 +138,6 @@ class BiographyPage extends StatelessWidget {
   }
 }
 
-class ActivityPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final _navigationData = MainNavigation.navigationData;
-    final _routeName = ModalRoute.of(context).settings.name.replaceAll('/', '');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_navigationData[_routeName]['title']),
-      ),
-      floatingActionButton: MyApp().floatingHomeButton(context),
-    );
-  }
-}
-
 class InstrumentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -178,6 +165,7 @@ class DocsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(_navigationData[_routeName]['title']),
       ),
+      body: SingleChildScrollView(child: Docs()),
       floatingActionButton: MyApp().floatingHomeButton(context),
     );
   }
