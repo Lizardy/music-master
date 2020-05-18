@@ -33,9 +33,8 @@ class MyApp extends StatelessWidget {
           title: FlatButton(
             onPressed: () => Navigator.pushNamed(context, '/${element.key}'),
             child: Text(element.value['title'],
-                style: GoogleFonts.ruslanDisplay(
-                  fontSize: 24.0,
-                )),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.ruslanDisplay(fontSize: 20.0)),
           ),
         ),
       ),
@@ -66,11 +65,7 @@ class MyApp extends StatelessWidget {
   Widget floatingHomeButton(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () => Navigator.pushNamed(context, '/'),
-      label: Text('На главную',
-          style: GoogleFonts.ruslanDisplay(
-            fontSize: 20.0,
-          )),
-//      icon: Icon(FontAwesomeIcons.home),
+      label: Text('на главную', style: GoogleFonts.alice(fontSize: 20.0)),
     );
   }
 
@@ -125,7 +120,8 @@ class BiographyPage extends StatelessWidget {
     final _routeName = ModalRoute.of(context).settings.name.replaceAll('/', '');
     return Scaffold(
       appBar: AppBar(
-        title: Text(_navigationData[_routeName]['title']),
+        title: Text(_navigationData[_routeName]['title'],
+            style: GoogleFonts.alice()),
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         double paddingH = constraints.maxWidth > 800 ? 60.0 : 10.0;

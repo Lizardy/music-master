@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gnezdilov/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Instruments extends StatefulWidget {
   final String appBarTitle;
@@ -142,7 +143,7 @@ class _InstrumentsState extends State<Instruments> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.appBarTitle),
+        title: Text(widget.appBarTitle, style: GoogleFonts.alice()),
         actions: <Widget>[
           _screenWidth > 1000
               ? tileLayoutSwitch()

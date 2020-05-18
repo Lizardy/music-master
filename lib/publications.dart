@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gnezdilov/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:date_format/date_format.dart';
 
@@ -147,7 +148,7 @@ class _PublicationsState extends State<Publications> {
       length: myTabs.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.appBarTitle),
+          title: Text(widget.appBarTitle, style: GoogleFonts.alice()),
           actions: <Widget>[publicationsOrder()],
           bottom: TabBar(
             tabs: myTabs,
