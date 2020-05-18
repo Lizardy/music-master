@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gnezdilov/docs.dart';
 import 'package:gnezdilov/instruments.dart';
+import 'package:gnezdilov/organizations.dart';
 import 'package:gnezdilov/publications.dart';
 import 'package:gnezdilov/router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -103,6 +104,7 @@ class MyHomePage extends StatelessWidget {
                 children: <Widget>[
                   MainCard(constraints.maxWidth),
                   ActivityCard(constraints.maxWidth),
+                  OrgsCard(constraints.maxWidth),
                   MainNavigation(constraints.maxWidth),
                 ],
               ),
