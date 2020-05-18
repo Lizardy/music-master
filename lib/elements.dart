@@ -37,8 +37,9 @@ class MainCard extends StatelessWidget {
         ),
       ),
       ListTile(
+        title: SelectableText("mnogostrun@mail.ru"),
         leading: IconButton(
-          icon: Icon(FontAwesomeIcons.envelopeSquare),
+          icon: FaIcon(FontAwesomeIcons.envelope),
           onPressed: () async {
             String url = 'mailto:mnogostrun@mail.ru';
             if (await canLaunch(url)) {
@@ -48,27 +49,25 @@ class MainCard extends StatelessWidget {
             }
           },
         ),
-        title: SelectableText("mnogostrun@mail.ru"),
       ),
+//      ListTile(
+//        title: SelectableText("+7 903 949 9597"),
+//        leading: IconButton(
+//          icon: Icon(FontAwesomeIcons.phoneSquare),
+//          onPressed: () async {
+//            String url = 'tel:+79039499597';
+//            if (await canLaunch(url)) {
+//              await launch(url);
+//            } else {
+//              throw 'Невозможно перейти по адресу $url';
+//            }
+//          },
+//        ),
+//      ),
       ListTile(
+        title: SelectableText("+7 913 092 1116"),
         leading: IconButton(
-          icon: Icon(FontAwesomeIcons.phoneSquare),
-          onPressed: () async {
-            String url = 'tel:+73852478583';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-        title: SelectableText(
-          "+7 (3852) 47-85-83",
-        ),
-      ),
-      ListTile(
-        leading: IconButton(
-          icon: Icon(FontAwesomeIcons.phoneSquare),
+          icon: FaIcon(FontAwesomeIcons.phone),
           onPressed: () async {
             String url = 'tel:+79130921116';
             if (await canLaunch(url)) {
@@ -78,11 +77,11 @@ class MainCard extends StatelessWidget {
             }
           },
         ),
-        title: SelectableText(
-          "+7 913 092 1116",
-        ),
       ),
       ListTile(
+        title: SelectableText(
+            "656066,\u00A0Барнаул, ул.\u00A0Уральская\u00A011\u20111"),
+        subtitle: Text('мастерская'),
         leading: IconButton(
           hoverColor: Colors.lightGreen,
           icon: Icon(FontAwesomeIcons.mapMarkerAlt),
@@ -95,14 +94,30 @@ class MainCard extends StatelessWidget {
             }
           },
         ),
-        title: SelectableText("656066,\u00A0Барнаул, ул.\u00A0Уральская\u00A011\u20111"),
       ),
       ListTile(
+        title: SelectableText(
+            "656043,\u00A0Барнаул, пр.\u00A0Красноармейский\u00A014"),
+        subtitle: Text(
+            'музей музыкальных инструментов в\u00A0«Городе\u00A0мастеров»'),
+        leading: IconButton(
+          hoverColor: Colors.lightGreen,
+          icon: Icon(FontAwesomeIcons.mapMarkerAlt),
+          onPressed: () async {
+            String url = 'https://go.2gis.com/nfm3e';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Невозможно перейти по адресу $url';
+            }
+          },
+        ),
+      ),
+      ListTile(
+        title: Text('видео на YouTube'),
         leading: IconButton(
           hoverColor: Colors.red,
-          icon: Icon(
-            FontAwesomeIcons.youtubeSquare,
-          ),
+          icon: FaIcon(FontAwesomeIcons.youtube),
           onPressed: () async {
             String url =
                 'https://www.youtube.com/channel/UCveazYk32WOwJ65uA8em-hA/';
@@ -113,14 +128,27 @@ class MainCard extends StatelessWidget {
             }
           },
         ),
-        title: Text('канал на YouTube'),
       ),
       ListTile(
+        title: Text('музыка на SoundCloud'),
+        leading: IconButton(
+          hoverColor: Colors.deepOrange,
+          icon: FaIcon(FontAwesomeIcons.soundcloud),
+          onPressed: () async {
+            String url = 'https://soundcloud.com/dytyrbjk4vxf';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Невозможно перейти по адресу $url';
+            }
+          },
+        ),
+      ),
+      ListTile(
+        title: Text('профиль на Одноклассниках'),
         leading: IconButton(
           hoverColor: Colors.orange,
-          icon: Icon(
-            FontAwesomeIcons.odnoklassnikiSquare,
-          ),
+          icon: FaIcon(FontAwesomeIcons.odnoklassniki),
           onPressed: () async {
             String url = 'https://ok.ru/profile/506526714215';
             if (await canLaunch(url)) {
@@ -130,7 +158,6 @@ class MainCard extends StatelessWidget {
             }
           },
         ),
-        title: Text('профиль на Одноклассниках'),
       ),
     ];
   }
@@ -148,34 +175,6 @@ class MainCard extends StatelessWidget {
         subtitle: Image.asset(
           'assets/images/slavic_pattern_h.jpg',
           fit: BoxFit.scaleDown,
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text('О скифской арфе \nна сайте группы \"Дядя Го\"',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url = 'http://www.goh.ru/skif/arfa.htm';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text('О скифской культуре \nна сайте группы \"Дядя Го\"',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url = 'http://www.goh.ru/skif/skifs.htm';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
         ),
       ),
       ListTile(
@@ -201,6 +200,34 @@ class MainCard extends StatelessWidget {
           onPressed: () async {
             String url =
                 'https://music-museum.ru/collections/expomusic/skifskaya-arfa-dar-altaya';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Невозможно перейти по адресу $url';
+            }
+          },
+        ),
+      ),
+      ListTile(
+        title: FlatButton(
+          child: Text('О скифской арфе \nна сайте группы \"Дядя Го\"',
+              textAlign: TextAlign.center),
+          onPressed: () async {
+            String url = 'http://www.goh.ru/skif/arfa.htm';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Невозможно перейти по адресу $url';
+            }
+          },
+        ),
+      ),
+      ListTile(
+        title: FlatButton(
+          child: Text('О скифской культуре \nна сайте группы \"Дядя Го\"',
+              textAlign: TextAlign.center),
+          onPressed: () async {
+            String url = 'http://www.goh.ru/skif/skifs.htm';
             if (await canLaunch(url)) {
               await launch(url);
             } else {
@@ -390,14 +417,14 @@ class MainNavigation extends StatelessWidget {
   final parentWidth;
 
   static Map<String, Map<String, String>> navigationData = {
-    'organizations': {
-      'title': 'Организации',
-      'imgPath': 'assets/images/organizations.jpg'
-    },
-    'activity': {
-      'title': 'Деятельность',
-      'imgPath': 'assets/images/activity.jpg'
-    },
+//    'organizations': {
+//      'title': 'Организации',
+//      'imgPath': 'assets/images/organizations.jpg'
+//    },
+//    'activity': {
+//      'title': 'Деятельность',
+//      'imgPath': 'assets/images/activity.jpg'
+//    },
     'instruments': {
       'title': 'Авторские инструменты',
       'imgPath': 'assets/images/instruments.jpg'
@@ -410,7 +437,7 @@ class MainNavigation extends StatelessWidget {
       'title': 'Публикации в СМИ',
       'imgPath': 'assets/images/publications.jpg'
     },
-    'docs': {'title': 'Дипломы', 'imgPath': 'assets/images/patent.jpg'},
+//    'docs': {'title': 'Дипломы', 'imgPath': 'assets/images/patent.jpg'},
   };
 
   Widget navigationTile(
@@ -452,7 +479,9 @@ class MainNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tileWidth = parentWidth > 800 ? 400 : parentWidth > 600 ? 250 : parentWidth;
+    final tileWidth =
+//        parentWidth > 800 ? parentWidth / 4 : parentWidth > 600 ? parentWidth / 2 : parentWidth;
+        parentWidth > 800 ? 350 : parentWidth > 600 ? 250 : parentWidth;
     return Container(
       child: GridView.count(
         shrinkWrap: true,
