@@ -59,6 +59,7 @@ class Gallery extends StatelessWidget {
     }
 
     return GridView.count(
+      physics: new NeverScrollableScrollPhysics(),
       crossAxisCount: MediaQuery.of(context).size.width ~/ thumbnailWidth,
       mainAxisSpacing: 2.0,
       crossAxisSpacing: 2.0,

@@ -148,6 +148,8 @@ class _OrgsCardState extends State<OrgsCard> {
         width: widget.parentWidth * 0.9,
         child: ListView(
           shrinkWrap: true,
+          primary: true,
+          physics: new NeverScrollableScrollPhysics(),
           children: _items,
         ),
       ),

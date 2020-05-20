@@ -485,6 +485,8 @@ class MainNavigation extends StatelessWidget {
     return Container(
       child: GridView.count(
         shrinkWrap: true,
+        primary: true,
+        physics: new NeverScrollableScrollPhysics(),
         crossAxisCount: parentWidth ~/ tileWidth,
         children: List<Widget>.from(navigationData.entries.map((element) =>
             navigationTile(context, element.key, element.value['title'],
