@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
 
   Widget bottomNavigation(BuildContext context) {
     var _navigationItems = List<Widget>();
-    if (MediaQuery.of(context).size.width < 600)
+    var _screenWidth = MediaQuery.of(context).size.width;
+    var mq = MediaQuery.of(context);
+    var _alignment = MainAxisAlignment.spaceAround;
+
+    if (_screenWidth < 800) {
       _navigationItems.add(
         ListTile(
           title: Image.asset(
@@ -28,6 +32,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       );
+    }
     _navigationItems.addAll(
       _navigationData.entries.map(
         (element) => ListTile(
@@ -35,25 +40,43 @@ class MyApp extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, '/${element.key}'),
             child: Text(element.value['title'],
                 textAlign: TextAlign.center,
-                style: GoogleFonts.ruslanDisplay(fontSize: 20.0)),
+                style: GoogleFonts.ruslanDisplay(
+                  fontSize: _screenWidth > 400 ? 20.0 : 16.0,
+                )),
           ),
         ),
       ),
     );
-
+    var _bottomSheetHeight = mq.size.height * 0.45;
+    if (_screenWidth > 1000) {
+      _bottomSheetHeight = mq.size.height * 0.3;
+    } else if (_screenWidth < 600 || mq.orientation == Orientation.landscape) {
+      _alignment = MainAxisAlignment.spaceBetween;
+      _bottomSheetHeight = mq.orientation == Orientation.landscape
+          ? mq.size.height
+          : mq.size.width;
+      _navigationItems.add(
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () => Navigator.pop(context),
+          )
+        ]),
+      );
+    }
     return BottomAppBar(
       child: Row(
         children: <Widget>[
           IconButton(
             icon: Icon(Icons.menu),
             onPressed: () => showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (context) {
                   return Container(
-                    height: MediaQuery.of(context).size.width < 600
-                        ? MediaQuery.of(context).size.height * 0.35
-                        : MediaQuery.of(context).size.height * 0.25,
-                    child: ListView(
+                    height: _bottomSheetHeight,
+                    child: Column(
+                      mainAxisAlignment: _alignment,
                       children: _navigationItems,
                     ),
                   );
@@ -65,9 +88,10 @@ class MyApp extends StatelessWidget {
   }
 
   Widget floatingHomeButton(BuildContext context) {
+    var _fontSize = MediaQuery.of(context).size.width > 600 ? 20.0 : 16.0;
     return FloatingActionButton.extended(
       onPressed: () => Navigator.pushNamed(context, '/'),
-      label: Text('на главную', style: GoogleFonts.alice(fontSize: 20.0)),
+      label: Text('на главную', style: GoogleFonts.alice(fontSize: _fontSize)),
     );
   }
 
@@ -109,8 +133,8 @@ class MyHomePage extends StatelessWidget {
                   Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10.0),
-                    child: Text('Сделано в семье с ❤',
-                        style: GoogleFonts.alice()),
+                    child:
+                        Text('Сделано в семье с ❤', style: GoogleFonts.alice()),
                   ),
                 ],
               ),
@@ -133,7 +157,9 @@ class BiographyPage extends StatelessWidget {
             style: GoogleFonts.alice()),
       ),
       body: LayoutBuilder(builder: (context, constraints) {
-        double paddingH = constraints.maxWidth > 800 ? 60.0 : 10.0;
+        double paddingH = constraints.maxWidth > 800
+            ? 60.0
+            : constraints.maxWidth < 400 ? 5.0 : 10.0;
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: paddingH, vertical: 10.0),
           child: SingleChildScrollView(child: Biography()),

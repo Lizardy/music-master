@@ -416,38 +416,35 @@ class Biography extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Card(
-        child: Container(
-          margin: EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              textBlock(text0),
-              galleryBlock(images0),
-              textBlock(text1),
-              galleryBlock(images1),
-              textBlock(text2),
-              galleryBlock(images2),
-              textBlock(text3),
-              galleryBlock(images3),
-              textBlock(text4),
-              galleryBlock(images4),
-              textBlock(text5),
-              galleryBlock(images5),
-              textBlock(text6),
-              galleryBlock(images6),
-              textBlock(text7),
-              galleryBlock(images7),
-              textBlock(text8),
-              galleryBlock(images8),
-              textBlock(text9),
-              galleryBlock(images9),
-              textBlock(text10),
-              textBlock('-------'),
-              textBlock(ending),
-            ],
-          ),
+    return Card(
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            textBlock(text0),
+            galleryBlock(images0),
+            textBlock(text1),
+            galleryBlock(images1),
+            textBlock(text2),
+            galleryBlock(images2),
+            textBlock(text3),
+            galleryBlock(images3),
+            textBlock(text4),
+            galleryBlock(images4),
+            textBlock(text5),
+            galleryBlock(images5),
+            textBlock(text6),
+            galleryBlock(images6),
+            textBlock(text7),
+            galleryBlock(images7),
+            textBlock(text8),
+            galleryBlock(images8),
+            textBlock(text9),
+            galleryBlock(images9),
+            textBlock(text10),
+            textBlock('-------'),
+            textBlock(ending),
+          ],
         ),
       ),
     );
