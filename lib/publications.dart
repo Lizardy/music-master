@@ -93,11 +93,19 @@ class _PublicationsState extends State<Publications> {
 
   final List<Tab> myTabs = <Tab>[
     Tab(text: 'Интервью'),
-    Tab(text: 'Мероприятия'),
+    Tab(text: 'События'),
     Tab(text: 'Иное'),
   ];
 
   Widget publicationTile(Publication publication) {
+    List<Widget> _subtitles = <Widget>[
+      Text(publication.mediaSource ?? '', overflow: TextOverflow.fade),
+      Text(
+        publication.date != null
+            ? formatDate(publication.date, [dd, '.', mm, '.', yyyy])
+            : '',
+      ),
+    ];
     return Card(
       elevation: 1,
       child: ListTile(
@@ -106,17 +114,24 @@ class _PublicationsState extends State<Publications> {
           publication.title,
           textAlign: TextAlign.justify,
         ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(publication.mediaSource ?? ''),
-            Text(
-              publication.date != null
-                  ? formatDate(publication.date, [dd, '.', mm, '.', yyyy])
-                  : '',
-            ),
-          ],
-        ),
+        subtitle: LayoutBuilder(builder: (context, constraints) {
+          return constraints.maxWidth > 400
+              ? Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: _subtitles,
+          ) : Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [_subtitles.first],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [_subtitles.last],
+              )
+            ],
+          );
+        }),
         onTap: () async {
           if (await canLaunch(publication.url)) {
             await launch(publication.url);
@@ -161,7 +176,7 @@ class _PublicationsState extends State<Publications> {
               case 'Интервью':
                 publicationType = PublicationType.interview;
                 break;
-              case 'Мероприятия':
+              case 'События':
                 publicationType = PublicationType.event;
                 break;
               case 'Иное':
@@ -171,7 +186,7 @@ class _PublicationsState extends State<Publications> {
                 publicationType = PublicationType.interview;
             }
             return Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
                       .collection('publications')
