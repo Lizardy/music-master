@@ -161,7 +161,7 @@ class BiographyPage extends StatelessWidget {
             ? 60.0
             : constraints.maxWidth < 400 ? 5.0 : 10.0;
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingH, vertical: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: paddingH),
           child: SingleChildScrollView(child: Biography()),
         );
       }),
