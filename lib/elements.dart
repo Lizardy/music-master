@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MainCard extends StatelessWidget {
           );
   }
 
-  List<Widget> contacts() {
+  List<Widget> contacts(BuildContext context) {
     return [
       ListTile(
         title: SelectableText(
@@ -41,11 +42,14 @@ class MainCard extends StatelessWidget {
         leading: IconButton(
           icon: FaIcon(FontAwesomeIcons.envelope),
           onPressed: () async {
-            String url = 'mailto:mnogostrun@mail.ru';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
+            String email = 'mnogostrun@mail.ru';
+            try {
+              await launch('mailto:$email');
+            } catch (e) {
+              await Clipboard.setData(ClipboardData(text: email));
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Email скопирован в буфер обмена'),
+              ));
             }
           },
         ),
@@ -69,11 +73,14 @@ class MainCard extends StatelessWidget {
         leading: IconButton(
           icon: FaIcon(FontAwesomeIcons.phone),
           onPressed: () async {
-            String url = 'tel:+79130921116';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
+            String phone = '+79130921116';
+            try {
+              await launch('tel:$phone');
+            } catch (e) {
+              await Clipboard.setData(ClipboardData(text: phone));
+              Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text('Номер скопирован в буфер обмена'),
+              ));
             }
           },
         ),
@@ -286,7 +293,7 @@ class MainCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
-                        children: contacts(),
+                        children: contacts(context),
                         mainAxisAlignment: MainAxisAlignment.start,
                         verticalDirection: VerticalDirection.down,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,7 +303,7 @@ class MainCard extends StatelessWidget {
                 : Container(
                     margin: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Column(
-                      children: contacts(),
+                      children: contacts(context),
                     ),
                   ),
             parentWidth > 800
