@@ -8,25 +8,25 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
+    steps:
+      - uses: actions/checkout@master
 
-        - name: Setup Flutter
-          uses: subosito/flutter-action@v1
-          with:
-            channel: 'beta'
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
 
-        - name: Install dependencies
-          run: |
-            flutter config --enable-web
-            flutter pub get
+      - name: Install dependencies
+        run: |
+          flutter config --enable-web
+          flutter pub get
 
-        - name: Build
-          run: flutter build web
+      - name: Build
+        run: flutter build web
 
-        - name: Deploy
-          uses: w9jds/firebase-action@master
-          with:
-            args: deploy --only hosting
-          env:
-            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
