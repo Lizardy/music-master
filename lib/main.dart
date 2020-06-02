@@ -130,12 +130,7 @@ class MyHomePage extends StatelessWidget {
                   ActivityCard(constraints.maxWidth),
                   OrgsCard(constraints.maxWidth),
                   MainNavigation(constraints.maxWidth),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10.0),
-                    child:
-                        Text('Сделано в семье с ❤', style: GoogleFonts.alice()),
-                  ),
+                  Footer(),
                 ],
               ),
             );

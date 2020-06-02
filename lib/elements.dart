@@ -502,3 +502,25 @@ class MainNavigation extends StatelessWidget {
     );
   }
 }
+
+class Footer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(10.0),
+      child:
+      FlatButton(
+        child: Text('Сделано в семье с ❤', style: GoogleFonts.alice()),
+        onPressed: () async {
+          String url = 'https://github.com/Lizardy/music-master';
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Невозможно перейти по адресу $url';
+          }
+        },
+      ),
+    );
+  }
+}
