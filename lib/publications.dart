@@ -71,11 +71,10 @@ class Publication {
   };
 
   Widget icon() {
+    String src = 'assets/images/publications/${this.iconFileName}';
     return this.iconFileName != null
-        ? CircleAvatar(
-            backgroundImage:
-                AssetImage('assets/images/publications/${this.iconFileName}'))
-        : CircleAvatar();
+        ? CircleAvatar(backgroundImage: AssetImage(src))
+        : CircleAvatar(backgroundColor: Colors.transparent);
   }
 }
 
