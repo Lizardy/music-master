@@ -54,20 +54,23 @@ class MainCard extends StatelessWidget {
           },
         ),
       ),
-//      ListTile(
-//        title: SelectableText("+7 903 949 9597"),
-//        leading: IconButton(
-//          icon: Icon(FontAwesomeIcons.phoneSquare),
-//          onPressed: () async {
-//            String url = 'tel:+79039499597';
-//            if (await canLaunch(url)) {
-//              await launch(url);
-//            } else {
-//              throw 'Невозможно перейти по адресу $url';
-//            }
-//          },
-//        ),
-//      ),
+      ListTile(
+        title: SelectableText("+7 903 949 9597"),
+        leading: IconButton(
+          icon: Icon(FontAwesomeIcons.phone),
+          onPressed: () async {
+            String phone = '+79039499597';
+            try {
+              await launch('tel:$phone');
+            } catch (e) {
+              await Clipboard.setData(ClipboardData(text: phone));
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Номер скопирован в буфер обмена'),
+              ));
+            }
+          },
+        ),
+      ),
       ListTile(
         title: SelectableText("+7 913 092 1116"),
         leading: IconButton(
@@ -85,23 +88,23 @@ class MainCard extends StatelessWidget {
           },
         ),
       ),
-      ListTile(
-        title: SelectableText(
-            "656066,\u00A0Барнаул, ул.\u00A0Уральская\u00A011\u20111"),
-        subtitle: Text('мастерская'),
-        leading: IconButton(
-          hoverColor: Colors.lightGreen,
-          icon: Icon(FontAwesomeIcons.mapMarkerAlt),
-          onPressed: () async {
-            String url = 'https://go.2gis.com/opwsn';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
+//      ListTile(
+//        title: SelectableText(
+//            "656066,\u00A0Барнаул, ул.\u00A0Уральская\u00A011\u20111"),
+//        subtitle: Text('мастерская'),
+//        leading: IconButton(
+//          hoverColor: Colors.lightGreen,
+//          icon: Icon(FontAwesomeIcons.mapMarkerAlt),
+//          onPressed: () async {
+//            String url = 'https://go.2gis.com/opwsn';
+//            if (await canLaunch(url)) {
+//              await launch(url);
+//            } else {
+//              throw 'Невозможно перейти по адресу $url';
+//            }
+//          },
+//        ),
+//      ),
       ListTile(
         title: SelectableText(
             "656043,\u00A0Барнаул, пр.\u00A0Красноармейский\u00A014"),

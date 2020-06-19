@@ -61,7 +61,7 @@ class OrgsCard extends StatefulWidget {
       'член Ассоциации фортепианных мастеров России и «ЕВРОПИАНО»',
       url: 'http://afmforum.ru/static.php?p=afm',
       iconFileName: 'afm.gif',
-      yearStart: 1999,
+      yearStart: 2000,
       yearEnd: 0,
     ),
     Organization(
