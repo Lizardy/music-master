@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class CustomRouter {
-  static Router router = Router();
+  static FluroRouter router = FluroRouter();
   static Handler _homeHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           MyHomePage());
