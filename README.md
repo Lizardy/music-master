@@ -31,10 +31,6 @@ The `photo_view` package provides great functionality for both viewing a single 
 
 https://github.com/flutter/flutter/issues/47600
 
-### Text selection to copy & paste
-
-https://github.com/flutter/flutter/issues/47234
-
 ### YouTube player embedding
 
 AFAIK none of the present packages for embedding YouTube player is compatible with the web
