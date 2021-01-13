@@ -513,8 +513,8 @@ class Footer extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(10.0),
       child:
-      FlatButton(
-        child: Text('Сделано в семье с ❤', style: GoogleFonts.alice()),
+      TextButton(
+        child: Text('сделано в семье', style: GoogleFonts.alice()),// с ❤
         onPressed: () async {
           String url = 'https://github.com/Lizardy/music-master';
           if (await canLaunch(url)) {
