@@ -40,6 +40,7 @@ class MainCard extends StatelessWidget {
       ListTile(
         title: SelectableText("mnogostrun@mail.ru"),
         leading: IconButton(
+          tooltip: 'mailto:mnogostrun@mail.ru',
           icon: FaIcon(FontAwesomeIcons.envelope),
           onPressed: () async {
             String email = 'mnogostrun@mail.ru';
@@ -47,7 +48,7 @@ class MainCard extends StatelessWidget {
               await launch('mailto:$email');
             } catch (e) {
               await Clipboard.setData(ClipboardData(text: email));
-              Scaffold.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Email скопирован в буфер обмена'),
               ));
             }
@@ -57,6 +58,7 @@ class MainCard extends StatelessWidget {
       ListTile(
         title: SelectableText("+7 903 949 9597"),
         leading: IconButton(
+          tooltip: 'tel:+79039499597',
           icon: Icon(FontAwesomeIcons.phone),
           onPressed: () async {
             String phone = '+79039499597';
@@ -64,7 +66,7 @@ class MainCard extends StatelessWidget {
               await launch('tel:$phone');
             } catch (e) {
               await Clipboard.setData(ClipboardData(text: phone));
-              Scaffold.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Номер скопирован в буфер обмена'),
               ));
             }
@@ -74,6 +76,7 @@ class MainCard extends StatelessWidget {
       ListTile(
         title: SelectableText("+7 913 092 1116"),
         leading: IconButton(
+          tooltip: 'tel:+79130921116',
           icon: FaIcon(FontAwesomeIcons.phone),
           onPressed: () async {
             String phone = '+79130921116';
@@ -81,7 +84,7 @@ class MainCard extends StatelessWidget {
               await launch('tel:$phone');
             } catch (e) {
               await Clipboard.setData(ClipboardData(text: phone));
-              Scaffold.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text('Номер скопирован в буфер обмена'),
               ));
             }
@@ -107,11 +110,12 @@ class MainCard extends StatelessWidget {
 //      ),
       ListTile(
         title: SelectableText(
-            "656043,\u00A0Барнаул, пр.\u00A0Красноармейский\u00A014"),
+            "Барнаул, пр.\u00A0Красноармейский\u00A014"),
         subtitle: Text(
             'музей музыкальных инструментов в\u00A0«Городе\u00A0мастеров»'),
         leading: IconButton(
           hoverColor: Colors.lightGreen,
+          tooltip: 'https://go.2gis.com/nfm3e',
           icon: Icon(FontAwesomeIcons.mapMarkerAlt),
           onPressed: () async {
             String url = 'https://go.2gis.com/nfm3e';
@@ -127,6 +131,7 @@ class MainCard extends StatelessWidget {
         title: Text('видео на YouTube'),
         leading: IconButton(
           hoverColor: Colors.red,
+          tooltip: 'https://www.youtube.com/channel/UCveazYk32WOwJ65uA8em-hA/',
           icon: FaIcon(FontAwesomeIcons.youtube),
           onPressed: () async {
             String url =
@@ -143,6 +148,7 @@ class MainCard extends StatelessWidget {
         title: Text('музыка на SoundCloud'),
         leading: IconButton(
           hoverColor: Colors.deepOrange,
+          tooltip: 'https://soundcloud.com/dytyrbjk4vxf',
           icon: FaIcon(FontAwesomeIcons.soundcloud),
           onPressed: () async {
             String url = 'https://soundcloud.com/dytyrbjk4vxf';
@@ -158,6 +164,7 @@ class MainCard extends StatelessWidget {
         title: Text('профиль на Одноклассниках'),
         leading: IconButton(
           hoverColor: Colors.orange,
+          tooltip: 'https://ok.ru/profile/506526714215',
           icon: FaIcon(FontAwesomeIcons.odnoklassniki),
           onPressed: () async {
             String url = 'https://ok.ru/profile/506526714215';
@@ -173,6 +180,33 @@ class MainCard extends StatelessWidget {
   }
 
   List<Widget> otherWebsites() {
+    List<Map<String, String>> items = [
+      {
+        'title': 'ГМИЛИКА: экспозиция \n«Культура древних народов Алтая»',
+        'url': 'http://gmilika.ru/ekspoziciya-kultura-drevnix-narodov-altaya.html',
+      },
+      {
+        'title': 'Российский национальный музей музыки:\n«Скифская арфа - дар Алтая»',
+        'url': 'https://music-museum.ru/collections/expomusic/skifskaya-arfa-dar-altaya.html',
+      },
+      {
+        'title': 'О скифской арфе \nна сайте группы \"Дядя Го\"',
+        'url': 'http://www.goh.ru/skif/arfa.htm',
+      },
+      {
+        'title': 'О скифской культуре \nна сайте группы \"Дядя Го\"',
+        'url': 'http://www.goh.ru/skif/skifs.htm',
+      },
+      {
+        'title': 'О народном мастере на сайте \nминистерства культуры Алтайского края',
+        'url': 'http://www.culture22.ru/institutions/folk-art/folk-artists/56040/',
+      },
+      {
+        'title': 'О народном мастере на сайте проекта \n«Традиционная народная культура Алтайского края»',
+        'url': 'http://alttradition.ru/mastera/2012/gnezdilov-aleksandr-il-ich1/index.php',
+      },
+    ];
+
     return [
       ListTile(
         title: Text(
@@ -187,98 +221,21 @@ class MainCard extends StatelessWidget {
           fit: BoxFit.scaleDown,
         ),
       ),
-      ListTile(
-        title: FlatButton(
-          child: Text('ГМИЛИКА: экспозиция \n«Культура древних народов Алтая»',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url =
-                'http://gmilika.ru/ekspoziciya-kultura-drevnix-narodov-altaya.html';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
+      ...items.map((item) => ListTile(
+        title: Tooltip(
+          message: item['url'],
+          child: TextButton(
+            child: Text(item['title'], textAlign: TextAlign.center),
+            onPressed: () async {
+              if (await canLaunch(item['url'])) {
+                await launch(item['url']);
+              } else {
+                throw 'Невозможно перейти по адресу ${item['url']}';
+              }
+            },
+          ),
         ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text(
-              'Российский национальный музей музыки:\n«Скифская арфа - дар Алтая»',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url =
-                'https://music-museum.ru/collections/expomusic/skifskaya-arfa-dar-altaya';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text('О скифской арфе \nна сайте группы \"Дядя Го\"',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url = 'http://www.goh.ru/skif/arfa.htm';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text('О скифской культуре \nна сайте группы \"Дядя Го\"',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url = 'http://www.goh.ru/skif/skifs.htm';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text(
-              'О народном мастере на сайте \nминистерства культуры Алтайского края',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url =
-                'http://www.culture22.ru/institutions/folk-art/folk-artists/56040/';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-      ListTile(
-        title: FlatButton(
-          child: Text(
-              'О народном мастере на сайте проекта \n«Традиционная народная культура Алтайского края»',
-              textAlign: TextAlign.center),
-          onPressed: () async {
-            String url =
-                'http://alttradition.ru/mastera/2012/gnezdilov-aleksandr-il-ich1/index.php';
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Невозможно перейти по адресу $url';
-            }
-          },
-        ),
-      ),
-    ];
+      )).toList()];
   }
 
   @override
