@@ -27,10 +27,6 @@ The `photo_view` package provides great functionality for both viewing a single 
 
 ## Not yet managed to solve
 
-### Hashtag in URL
-
-https://github.com/flutter/flutter/issues/33245
-
 ### SEO, server-side rendering
 
 https://github.com/flutter/flutter/issues/47600

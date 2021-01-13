@@ -8,9 +8,11 @@ import 'package:gnezdilov/router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'elements.dart';
 import 'biography.dart';
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 void main() {
   CustomRouter.setupRouter();
+  configureApp();
   runApp(MyApp());
 }
 
