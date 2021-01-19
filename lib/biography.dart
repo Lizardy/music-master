@@ -180,7 +180,7 @@ class Biography extends StatelessWidget {
     ),
     GalleryItem(
       id: 'g44',
-      resource: 'assets/images/portrait.jpg',
+      resource: 'assets/images/portrait_v.jpg',
       description:
           'А.\u00A0Гнездилов с реставрированной этнографической скифской арфой',
     ),
