@@ -187,7 +187,7 @@ class _PublicationsState extends State<Publications> {
             return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: Firestore.instance
+                  stream: FirebaseFirestore.instance
                       .collection('publications')
                       .where('type', isEqualTo: describeEnum(publicationType))
                       .snapshots(),
@@ -199,13 +199,13 @@ class _PublicationsState extends State<Publications> {
                       case ConnectionState.waiting:
                         return Container();
                       default:
-                        if (snapshot.data.documents.isEmpty)
+                        if (snapshot.data.docs.isEmpty)
                           return Container();
                         else {
                           List<Publication> publications = snapshot
-                              .data.documents
+                              .data.docs
                               .map((DocumentSnapshot document) =>
-                                  Publication.fromMap(document.data))
+                                  Publication.fromMap(document.data()))
                               .toList();
                           if (_publicationsOrderNewFirst)
                             publications
