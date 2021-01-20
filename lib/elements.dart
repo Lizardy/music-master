@@ -12,12 +12,12 @@ class MainCard extends StatelessWidget {
   Widget photoPortrait() {
     return parentWidth > 800
         ? Image.asset(
-            'assets/images/portrait_v.JPG',
+            'assets/images/portrait_v.jpg',
             fit: BoxFit.fitHeight,
             width: parentWidth / 4,
           )
         : Image.asset(
-            'assets/images/portrait_h.JPG',
+            'assets/images/portrait_h.jpg',
             fit: BoxFit.fitWidth,
           );
   }
